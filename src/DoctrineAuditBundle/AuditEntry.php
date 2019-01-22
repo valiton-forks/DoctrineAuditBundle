@@ -67,7 +67,7 @@ class AuditEntry
      *
      * @return int
      */
-    public function getObjectId(): ?int
+    public function getObjectId()
     {
         return $this->object_id;
     }
@@ -97,7 +97,7 @@ class AuditEntry
      *
      * @return string
      */
-    public function getIp(): ?string
+    public function getIp()
     {
         return $this->ip;
     }
@@ -117,7 +117,7 @@ class AuditEntry
      *
      * @return array
      */
-    public function getDiffs(): ?array
+    public function getDiffs()
     {
         return json_decode($this->diffs, true);
     }

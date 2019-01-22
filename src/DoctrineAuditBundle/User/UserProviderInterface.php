@@ -4,5 +4,8 @@ namespace DH\DoctrineAuditBundle\User;
 
 interface UserProviderInterface
 {
-    public function getUser(): ?UserInterface;
+    /**
+     * @return UserInterface|null
+     */
+    public function getUser();
 }

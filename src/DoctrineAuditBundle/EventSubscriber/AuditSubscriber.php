@@ -43,7 +43,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function preSoftDelete(LifecycleEventArgs $args): void
+    public function preSoftDelete(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
         $em = $args->getEntityManager();
@@ -67,7 +67,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function onFlush(OnFlushEventArgs $args): void
+    public function onFlush(OnFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -158,7 +158,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function flush(EntityManager $em): void
+    private function flush(EntityManager $em)
     {
         $em->getConnection()->getConfiguration()->setSQLLogger($this->loggerBackup);
         $uow = $em->getUnitOfWork();
@@ -204,7 +204,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function insert(EntityManager $em, $entity, array $ch): void
+    private function insert(EntityManager $em, $entity, array $ch)
     {
         $meta = $em->getClassMetadata(\get_class($entity));
         $this->audit($em, [
@@ -226,7 +226,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function update(EntityManager $em, $entity, array $ch): void
+    private function update(EntityManager $em, $entity, array $ch)
     {
         $diff = $this->diff($em, $entity, $ch);
         if (!$diff) {
@@ -252,7 +252,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function remove(EntityManager $em, $entity, $id): void
+    private function remove(EntityManager $em, $entity, $id)
     {
         $meta = $em->getClassMetadata(\get_class($entity));
         $this->audit($em, [
@@ -275,7 +275,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function associate(EntityManager $em, $source, $target, array $mapping): void
+    private function associate(EntityManager $em, $source, $target, array $mapping)
     {
         $meta = $em->getClassMetadata(\get_class($source));
         $this->audit($em, [
@@ -303,7 +303,7 @@ class AuditSubscriber implements EventSubscriber
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    private function dissociate(EntityManager $em, $source, $target, $id, array $mapping): void
+    private function dissociate(EntityManager $em, $source, $target, $id, array $mapping)
     {
         $meta = $em->getClassMetadata(\get_class($source));
         $this->audit($em, [
@@ -327,7 +327,7 @@ class AuditSubscriber implements EventSubscriber
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    private function audit(EntityManager $em, array $data): void
+    private function audit(EntityManager $em, array $data)
     {
         $auditTable = $this->configuration->getTablePrefix().$data['table'].$this->configuration->getTableSuffix();
         $fields = [
@@ -439,7 +439,7 @@ class AuditSubscriber implements EventSubscriber
      *
      * @return array
      */
-    private function assoc(EntityManager $em, $association = null): ?array
+    private function assoc(EntityManager $em, $association = null)
     {
         if (null === $association) {
             return null;
